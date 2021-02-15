@@ -70,6 +70,7 @@ case ${MODE} in
     ;;
 
   destroy)
+    terraform init
     terraform destroy -no-color -auto-approve
     ;;
 
