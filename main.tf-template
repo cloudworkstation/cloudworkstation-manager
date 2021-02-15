@@ -1,0 +1,32 @@
+terraform {
+  backend "s3" {
+    bucket = "${STATE_BUCKET}"
+    key    = "${STATE_KEY}/${DESKTOP_ID}"
+    region = "${AWS_REGION}"
+  }
+}
+
+provider "aws" {
+  region = "${AWS_REGION}"
+}
+
+module "desktop" {
+  source = "github.com/cloudworkstation/cloudworkstation-deployer.git?ref=${VERSION}/desktop-instance"
+  
+  aws_region = "${AWS_REGION}"
+  vpc_id     = "${VPC_ID}"
+
+  task_subnets     = $TASK_SUBNETS
+  instance_subnets = $INSTANCE_SUBNETS
+
+  desktop_id = "${DESKTOP_ID}"
+  ami_id     = "${AMI_ID}"
+  username   = "${MACHINE_USERNAME}"
+
+  services_registry_namespace   = "${NAMESPACE_ID}"
+  traffic_source_security_group = "${SECURITY_GROUP_ID}"
+
+  user_data = "${B64_USER_DATA}"
+}
+
+
