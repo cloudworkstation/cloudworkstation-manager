@@ -19,9 +19,11 @@ module "desktop" {
   task_subnets     = $TASK_SUBNETS
   instance_subnets = $INSTANCE_SUBNETS
 
-  desktop_id = "${DESKTOP_ID}"
-  ami_id     = "${AMI_ID}"
-  username   = "${MACHINE_USERNAME}"
+  desktop_id      = "${DESKTOP_ID}"
+  ami_id          = "${AMI_ID}"
+  username        = "${MACHINE_USERNAME}"
+  screen_geometry = "${SCREEN_GEOMETRY}"
+  machinedefcode  = "${MACHINE_DEF_ID}"
 
   services_registry_namespace   = "${NAMESPACE_ID}"
   traffic_source_security_group = "${SECURITY_GROUP_ID}"
