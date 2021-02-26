@@ -45,6 +45,10 @@ if [[ -z "${MACHINE_USERNAME}" ]]; then
   echo "MACHINE_USERNAME is not present in environment"
   exit 1
 fi
+if [[ -z "${INSTANCE_TYPE}" ]]; then
+  echo "INSTANCE_TYPE is not present in environment"
+  exit 1
+fi
 if [[ -z "${SCREEN_GEOMETRY}" ]]; then
   echo "SCREEN_GEOMETRY is not present in environment"
   exit 1
@@ -67,7 +71,7 @@ if [[ -z "${B64_USER_DATA}" ]]; then
 fi
 
 # now update main.tf-template with these values
-envsubst '${STATE_BUCKET} ${STATE_KEY} ${AWS_REGION} ${VERSION} ${VPC_ID} ${TASK_SUBNETS} ${INSTANCE_SUBNETS} ${DESKTOP_ID} ${AMI_ID} ${MACHINE_USERNAME} ${SCREEN_GEOMETRY} ${MACHINE_DEF_ID} ${NAMESPACE_ID} ${SECURITY_GROUP_ID} ${B64_USER_DATA}' < main.tf-template > main-${DESKTOP_ID}.tf
+envsubst '${STATE_BUCKET} ${STATE_KEY} ${AWS_REGION} ${VERSION} ${VPC_ID} ${TASK_SUBNETS} ${INSTANCE_SUBNETS} ${DESKTOP_ID} ${AMI_ID} ${MACHINE_USERNAME} ${INSTANCE_TYPE} ${SCREEN_GEOMETRY} ${MACHINE_DEF_ID} ${NAMESPACE_ID} ${SECURITY_GROUP_ID} ${B64_USER_DATA}' < main.tf-template > main-${DESKTOP_ID}.tf
 
 # check what we were asked to do
 case ${MODE} in
