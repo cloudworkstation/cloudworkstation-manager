@@ -25,6 +25,7 @@ module "desktop" {
   screen_geometry = "${SCREEN_GEOMETRY}"
   machinedefcode  = "${MACHINE_DEF_ID}"
   instance_type   = "${INSTANCE_TYPE}"
+  env_key         = "${ENV_KEY}"
 
   services_registry_namespace   = "${NAMESPACE_ID}"
   traffic_source_security_group = "${SECURITY_GROUP_ID}"

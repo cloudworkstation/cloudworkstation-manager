@@ -69,9 +69,13 @@ if [[ -z "${B64_USER_DATA}" ]]; then
   echo "B64_USER_DATA is not present in environment"
   exit 1
 fi
+if [[ -z "${ENV_KEY}" ]]; then
+  echo "ENV_KEY is not present in environment"
+  exit 1
+fi
 
 # now update main.tf-template with these values
-envsubst '${STATE_BUCKET} ${STATE_KEY} ${AWS_REGION} ${VERSION} ${VPC_ID} ${TASK_SUBNETS} ${INSTANCE_SUBNETS} ${DESKTOP_ID} ${AMI_ID} ${MACHINE_USERNAME} ${INSTANCE_TYPE} ${SCREEN_GEOMETRY} ${MACHINE_DEF_ID} ${NAMESPACE_ID} ${SECURITY_GROUP_ID} ${B64_USER_DATA}' < main.tf-template > main-${DESKTOP_ID}.tf
+envsubst '${STATE_BUCKET} ${STATE_KEY} ${AWS_REGION} ${VERSION} ${VPC_ID} ${TASK_SUBNETS} ${INSTANCE_SUBNETS} ${DESKTOP_ID} ${AMI_ID} ${MACHINE_USERNAME} ${INSTANCE_TYPE} ${SCREEN_GEOMETRY} ${MACHINE_DEF_ID} ${NAMESPACE_ID} ${SECURITY_GROUP_ID} ${B64_USER_DATA} ${ENV_KEY}' < main.tf-template > main-${DESKTOP_ID}.tf
 
 # check what we were asked to do
 case ${MODE} in
